@@ -1,4 +1,4 @@
-const product=require("../modals/Product")
+const Product=require("../modals/Product")
 
 const createproduct=async(req,res)=>{
 
@@ -7,6 +7,7 @@ const createproduct=async(req,res)=>{
         Title: req.body.Title,
         Description: req.body.Description, 
         Categories: req.body.Categories,
+        Image:req.body.Image,
         Price:req.body.Price,
         Address:req.body.Address,
         })
@@ -20,3 +21,4 @@ const createproduct=async(req,res)=>{
 
 
 }
+module.exports = createproduct

@@ -21,5 +21,5 @@ Address:{
 },
 })
 
-const Product=mongoose.model("Products",requestSchema)
+const Product=mongoose.model("Products", productSchema)
 module.exports=Product
