@@ -5,18 +5,18 @@ const User = require("../modals/User")
 const createcart =async(req,res)=>{
     
     try{
-        const id = req.user.data.id
+      
 
       const createcart= await Cart.create({
-        UserId:id,
+        UserId:req.body.UserId,
         Products:req.body.Products,
         quantity:req.body.Quantity,
         
       })
-      const cart=await User.findById(id)
+      
 
        //successfully500
-       res.status(200).json({message:"done",cart})
+       res.status(200).json({message:"done",Cart})
       
     }catch(err){
        console.log(err);

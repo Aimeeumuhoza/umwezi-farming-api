@@ -11,15 +11,14 @@ const orderSchema= new mongoose.Schema({
        Quantity:{
            type:Number
        },
-       Amount:{
-           type:Number
-       },
-       Status:{
-           type:String,
-           default:"pending"
-       }
-   }]
-
+   }],
+   Amount:{
+    type:Number
+  },
+   Status:{
+    type:String,
+    default:"pending"
+}
    
 })
 

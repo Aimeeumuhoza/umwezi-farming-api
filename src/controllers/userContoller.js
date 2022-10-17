@@ -18,4 +18,44 @@ const createUser = async(req,res)=>{
     }
 }
 
-module.exports = createUser   
+const getuser = async (req,res)=>{
+    try{ 
+        const id=  req.params._id
+        const user = await User.findById(id)
+        // const user = await User.findAll()
+        res.status(200).json({message:"user found",user})
+    }catch(error){
+      console.log(error);
+    }
+  }
+  const getAll = async(req,res)=>{
+    try{
+       const user =await User.find()
+       res.status(200).json(user)
+    }catch(err){
+       console.log(err);
+    }
+  }
+  const updateUser= async(req,res)=>{
+      
+    try{
+       const id=req.params._id
+       const user=await User.findByIdAndUpdate(id,req.body)
+       res.status(200).json({messsage:"user updated",user})
+    }
+    catch(error){
+       console.log(error)
+    }
+  }
+  const deleteUser=async(req,res)=>{
+      
+    try{
+        const id= req.params._id
+        const user=await User.findByIdAndDelete(id)
+        res.status(200).json({message:"user deleted ",user})
+    }catch(error){
+       console.log(error)
+    }
+    }
+
+module.exports ={createUser,getuser,getAll,updateUser,deleteUser}    

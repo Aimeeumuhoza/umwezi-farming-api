@@ -13,7 +13,7 @@ app.use("/user",userRoute)
 app.use("/request",requestRoute)
 app.use("/product",productRoute)
 app.use("/order",orderRoute)
-app.use("/order",cartRoute)
+app.use("/cart",cartRoute)
 const port=8000
 database()
 app.listen(port,()=>{

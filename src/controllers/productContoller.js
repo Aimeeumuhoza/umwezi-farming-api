@@ -1,6 +1,6 @@
-const Product=require("../modals/Product")
+const Product = require("../modals/Product")
 
-const createproduct=async(req,res)=>{
+const createproduct = async(req,res)=>{
 
     try{
         const product = await Product.create({
@@ -11,14 +11,24 @@ const createproduct=async(req,res)=>{
         Price:req.body.Price,
         Address:req.body.Address,
         })
-        res.status(200).json({message:"product created successfully",product})
+
+      return res.status(200).json({message:"product created successfully",product})
     }catch(error){
        console.log("err",error);
 
 
     }
+  }
+    const getProduct = async (req,res)=>{
 
+        try{ 
+            const id = req.params._id
+            const product = await Product.find({})
+  
+            res.status(200).json({message:"products",product})
+        }catch(error){
+          console.log(error);
+        }
+      }
 
-
-}
-module.exports = createproduct
+module.exports ={ createproduct, getProduct}
