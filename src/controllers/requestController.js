@@ -68,7 +68,7 @@ const getrequest = async (req,res)=>{
       }
       return res.status(200).json({message:"request confirmed"})
     } catch (error) {
-      console.log(error);
+      
     }
   }
   const deleterequest=async(req,res)=>{
