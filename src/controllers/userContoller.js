@@ -1,23 +1,47 @@
 const User=require('../modals/User')
+const Request = require("../modals/Request")
 const bcrypt = require('bcryptjs');
+const {sign} = require("../helpers/jwt")
+const mailer = require("../helpers/transport")
 
 const createUser = async(req,res)=>{
     try{ 
         const salt = await bcrypt.genSalt(8)
         const hashpsw = await bcrypt.hash(req.body.password,salt)
-        req.body.password = hashpsw
-       const user = await User.create({
-           username: req.body.name,
+         req.body.password = hashpsw
+
+         const user = await User.create({
+           username: req.body.username,
            email: req.body.email, 
            password: req.body.password
        })
-       return res.status(200).json({message:"user created successfully",user})
+
+      await mailer({email:user.email})
+      return res.status(200).json({message:"order created successfully",user})
+
     }catch(error){
        console.log(error);
-       
+       return res.status(400).json({error:error.message})
     }
 }
 
+const login= async(req,res)=>{
+   try{
+       const user = await User.findOne({email: req.body.email})
+      
+       if(user){
+         const isMatch = await bcrypt.compare(req.body.password, user.password)
+          if(isMatch){
+            const token = await sign({id:user._id,email:user.email,role:user.role})
+            user.password = null
+            return res.status(200).json({message:"user logged in successfully",token,user})
+          }
+       }
+   }catch(err){
+     console.log(err)
+      return res.status(400).json({error:err})
+   }
+}
 const getuser = async (req,res)=>{
     try{ 
         const id=  req.params._id
@@ -58,4 +82,4 @@ const getuser = async (req,res)=>{
     }
     }
 
-module.exports ={createUser,getuser,getAll,updateUser,deleteUser}    
+module.exports ={createUser,getuser,getAll,updateUser,deleteUser,login}    

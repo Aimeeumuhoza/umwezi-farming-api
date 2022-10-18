@@ -10,6 +10,9 @@ email:{
 },
 password:{
     type:String,
+},
+role:{
+    type:String
 }
 })
 const User = mongoose.model("users",userSchema)

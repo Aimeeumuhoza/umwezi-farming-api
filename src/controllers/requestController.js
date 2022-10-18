@@ -1,16 +1,26 @@
 const Request=require('../modals/Request')
-
+const mailer = require("../helpers/transport")
+const bcrypt = require('bcryptjs')
+const User = require("../modals/User")
 
 const createrequest=async(req,res)=>{
     try{
+        const request = await Request.create({
+          Firstname:req.body.Firstname,
+          Lastname:req.body.Lastname,
+          Email:req.body.Email, 
+          Option:req.body.Option,
+          Description:req.body.Description
+        })
         
-        
-        const request = await Request.create({ Firstname:req.body.Firstname,Lastname:req.body.Lastname, Option:req.body.Option,Description:req.body.Description })
-        return res.status(200).json({message:"required",request})
-
-    }catch(err){
+        await mailer({email:request.Email} ,"createrequest").catch((error)=>{
+          console.log(error)
+        })
+        return res.status(200).json({message:"request sent successfully",request})
+    }
+    catch(err){
         console.log(err)
-        
+        return res.status(400).json({error:error.messageS})
     }
 }
 const getrequest = async (req,res)=>{
@@ -42,15 +52,34 @@ const getrequest = async (req,res)=>{
        console.log(error)
     }
   }
+  const confirmRequest = async( req ,res )=>{
+    try {
+      const id = req.params._id
+      const user = await Request.findOne(id)
+      console.log(user);
+      if(user){
+        const newUser = await User.create({
+          username: user.Firstname,
+          password:"12345",
+          email:user.Email
+        })
+        await newUser.save()
+        // await mailer({})
+      }
+      return res.status(200).json({message:"request confirmed"})
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const deleterequest=async(req,res)=>{
       
     try{
         const id= req.params._id
         const request=await Request.findByIdAndDelete(id)
-        res.status(200).json({message:"user deleted ",request})
+        res.status(200).json({message:"request deleted ",request})
     }catch(error){
        console.log(error)
     }
     }
 
-module.exports = {createrequest,getrequest,getAllrequest,updaterequest,deleterequest} 
+module.exports = {createrequest,getrequest,getAllrequest,updaterequest,deleterequest,confirmRequest} 
