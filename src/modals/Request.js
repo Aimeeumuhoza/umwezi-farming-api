@@ -10,7 +10,7 @@ const requestSchema= new mongoose.Schema({
     Email:{
         type:String,
     },
-   Options:{
+   Option:{
      type:String,
     },
     Description:{

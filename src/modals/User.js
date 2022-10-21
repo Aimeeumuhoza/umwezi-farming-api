@@ -13,7 +13,7 @@ password:{
 },
 role:{
     type:String,
-    default:"client",
+    // default:"client",
     enum:["farmer","salesPerson","admin"]
 }
 })

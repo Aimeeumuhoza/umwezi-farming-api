@@ -41,10 +41,11 @@ const mailer = async (info, action) =>{
              break;
 
              case "confirm":
-                 subject="";
+                 subject="user accepted";
                  emailto = info.email;
                  composition = `<p>
-                 your request accepted you are now our partner this is your credential ${info.username} and ${info.password}
+                 your request accepted you are now our partner this is your credential <br/>
+                 <span>username: </span><h4>${info.username}</h4><span>password: </span> <h4>${info.password}</h4>
              </p>`;
              break;
              case "order":

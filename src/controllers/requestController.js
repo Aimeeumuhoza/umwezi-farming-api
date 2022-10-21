@@ -1,4 +1,4 @@
-const Request=require('../modals/Request')
+const Request = require('../modals/Request')
 const mailer = require("../helpers/transport")
 const bcrypt = require('bcryptjs')
 const generatePassword = require("../helpers/generatePassword")
@@ -61,16 +61,16 @@ const getrequest = async (req,res)=>{
       const salt = await bcrypt.genSalt(10)
       const hashpsw = await bcrypt.hash(password,salt)
      
-
       if(user){
         const newUser = await User.create({
-          username: user.Firstname,
+          username: user[0].Firstname,
           password:hashpsw,
-          email:user.Email,
-          role:user.Option
+          email:user[0].Email,
+          role:user[0].Option
         })
         await mailer({email:newUser.email,password:password,username:newUser.username},"confirm")
         await newUser.save()
+        // await user.remove()
       }
       return res.status(200).json({message:"request confirmed"})
     } catch (error) {
