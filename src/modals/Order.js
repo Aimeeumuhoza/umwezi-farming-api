@@ -1,9 +1,11 @@
 const mongoose=require("mongoose")
 
 const orderSchema= new mongoose.Schema({
-    UserId:{
-           type:String,
-            },
+    UserId :{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+        },
+
    Products:[{
        productId:{
            type:String

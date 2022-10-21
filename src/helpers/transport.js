@@ -33,10 +33,10 @@ const mailer = async (info, action) =>{
 
             break;
             case "CreateUser":
-                 subject="";
+                 subject="account";
                  emailto = info.email;
                  composition = `<p>
-                 you are  now  Our partner !! soon get it you will get Your credentials !
+                 your account created successfully!
              </p>`;
              break;
 
@@ -47,7 +47,13 @@ const mailer = async (info, action) =>{
                  your request accepted you are now our partner this is your credential ${info.username} and ${info.password}
              </p>`;
              break;
-             
+             case "order":
+                 subject="Order ";
+                 emailto = info.email;
+                 composition = `<p>
+                 your order has been received
+             </p>`;
+             break;
             default:
                 subject ="";
                 break;

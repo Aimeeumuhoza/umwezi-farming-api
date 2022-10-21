@@ -1,5 +1,4 @@
-const User=require('../modals/User')
-const Request = require("../modals/Request")
+const User = require('../modals/User')
 const bcrypt = require('bcryptjs');
 const {sign} = require("../helpers/jwt")
 const mailer = require("../helpers/transport")
@@ -13,7 +12,8 @@ const createUser = async(req,res)=>{
          const user = await User.create({
            username: req.body.username,
            email: req.body.email, 
-           password: req.body.password
+           password: req.body.password,
+           role:req.body.role
        })
 
       await mailer({email:user.email},"CreateUser")

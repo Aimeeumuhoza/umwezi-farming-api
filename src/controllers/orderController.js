@@ -1,17 +1,21 @@
 const Order=require("../modals/Order")
 const User = require("../modals/User")
-
+const mailer = require("../helpers/transport")
 const creatorder =async(req,res)=>{
     
     try{
+      const id= req.user.data.id
       const order = await Order.create({
-         UserId:req.body.UserId,
+        UserId:id,
         Products:req.body.Products,
         Amount:req.body.Amount,
         Quantity:req.body.Quantity,
         Status: req.body.Status
       })
-      
+      const email= req.user.data.email
+      await mailer({email:email} ,"order").catch((error)=>{
+        console.log(error)
+       })
       return res.status(200).json({message:"order created successfully",order})
       
     }catch(err){
