@@ -16,7 +16,7 @@ const createUser = async(req,res)=>{
            password: req.body.password
        })
 
-      await mailer({email:user.email})
+      await mailer({email:user.email},"CreateUser")
       return res.status(200).json({message:"order created successfully",user})
 
     }catch(error){

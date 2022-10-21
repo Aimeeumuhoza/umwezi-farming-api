@@ -1,6 +1,7 @@
 const Request=require('../modals/Request')
 const mailer = require("../helpers/transport")
 const bcrypt = require('bcryptjs')
+const generatePassword = require("../helpers/generatePassword")
 const User = require("../modals/User")
 
 const createrequest=async(req,res)=>{
@@ -54,17 +55,22 @@ const getrequest = async (req,res)=>{
   }
   const confirmRequest = async( req ,res )=>{
     try {
-      const id = req.params._id
-      const user = await Request.findOne(id)
-      console.log(user);
+      const {id} = req.params._id
+      const user = await Request.find(id).select("Firstname Email Option")
+      const password = generatePassword()
+      const salt = await bcrypt.genSalt(10)
+      const hashpsw = await bcrypt.hash(password,salt)
+     
+
       if(user){
         const newUser = await User.create({
           username: user.Firstname,
-          password:"12345",
-          email:user.Email
+          password:hashpsw,
+          email:user.Email,
+          role:user.Option
         })
+        await mailer({email:newUser.email,password:password,username:newUser.username},"confirm")
         await newUser.save()
-        // await mailer({})
       }
       return res.status(200).json({message:"request confirmed"})
     } catch (error) {

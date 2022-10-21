@@ -16,10 +16,11 @@ const mailer = async (info, action) =>{
 
     });
 
-   
+    
     let subject;
     let emailto;
     let composition;
+    console.log(info);
 
     switch(action){
 
@@ -36,6 +37,14 @@ const mailer = async (info, action) =>{
                  emailto = info.email;
                  composition = `<p>
                  you are  now  Our partner !! soon get it you will get Your credentials !
+             </p>`;
+             break;
+
+             case "confirm":
+                 subject="";
+                 emailto = info.email;
+                 composition = `<p>
+                 your request accepted you are now our partner this is your credential ${info.username} and ${info.password}
              </p>`;
              break;
              
