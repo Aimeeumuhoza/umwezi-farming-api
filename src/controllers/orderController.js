@@ -35,6 +35,16 @@ const creatorder =async(req,res)=>{
       console.log(error);
     }
   }
+  const getOrderByUserId = async() =>{
+    try {
+      const userId = req.user.data.id
+      console.log(userId);
+      // const user = await Order.find(userId)
+      // console.log(user)
+    } catch (error) {
+      
+    }
+  }
   const getAllorders = async(req,res)=>{
     try{
        const order =await Order.find()
@@ -64,4 +74,4 @@ const creatorder =async(req,res)=>{
        console.log(error)
     }
     }
-module.exports = {creatorder, getorder, getAllorders,updatorder,deletorder}
+module.exports = {creatorder, getorder, getAllorders,updatorder,deletorder ,getOrderByUserId}

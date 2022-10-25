@@ -5,10 +5,12 @@ const requestRoute =require("./src/routers/requestRouter")
 const productRoute =require("./src/routers/productRouter")
 const orderRoute =require("./src/routers/orderRoute")
 const cartRoute =require("./src/routers/cartRouter")
+const cors = require("cors")
 const app=express()
 
 app.use(express.json())
 
+app.use(cors({origin:"*"}))
 app.use("/user",userRoute)
 app.use("/request",requestRoute)
 app.use("/product",productRoute)

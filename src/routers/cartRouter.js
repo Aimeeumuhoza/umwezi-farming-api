@@ -2,9 +2,6 @@ const express = require("express")
 const cartRoute= express()
 const {createcart,getcart,deletecart,updatecart,getAllcart}= require("../controllers/cartController")
 
-
-
-
 cartRoute.post("/create",createcart)
 cartRoute.get("/get/:_id",getcart)
 cartRoute.get("/All",getAllcart)
