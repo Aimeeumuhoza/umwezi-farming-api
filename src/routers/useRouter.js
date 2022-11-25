@@ -6,9 +6,9 @@ const userRoute = express()
 
 userRoute.post("/create", createUser)
 userRoute.get("/get/:_id",verifyTokenAndAdmin, getuser)
-userRoute.get("/All",verifyTokenAndAdmin, getAll)
+userRoute.get("/All", getAll)
 userRoute.patch("/update/:_id", updateUser )
-userRoute.delete("/delete/:_id", verifyTokenAndAdmin,deleteUser )
+userRoute.delete("/delete/:_id",deleteUser )
 userRoute.post("/login", login )
 module.exports = userRoute
  

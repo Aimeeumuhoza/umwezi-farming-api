@@ -13,8 +13,8 @@ password:{
 },
 role:{
     type:String,
-    // default:"client",
-    enum:["farmer","salesPerson","admin"]
+    default:"client",
+    enum:["client","farmer","salesPerson","admin"]
 }
 })
 const User = mongoose.model("users",userSchema)
