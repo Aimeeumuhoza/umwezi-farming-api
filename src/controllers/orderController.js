@@ -37,8 +37,10 @@ const creatorder =async(req,res)=>{
   }
   const getOrderByUserId = async() =>{
     try {
-      const userId = req.user.data.id
-      console.log(userId);
+      const {userId} = req.user.data.id
+      const orders = await Order.find(userId)
+      console.log(orders);
+      // console.log(orders);
       // const user = await Order.find(userId)
       // console.log(user)
     } catch (error) {
