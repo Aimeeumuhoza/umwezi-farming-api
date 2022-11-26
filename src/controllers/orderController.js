@@ -1,5 +1,5 @@
 const Order=require("../modals/Order")
-const User = require("../modals/User")
+const Product = require("../modals/Product")
 const mailer = require("../helpers/transport")
 const creatorder =async(req,res)=>{
     
