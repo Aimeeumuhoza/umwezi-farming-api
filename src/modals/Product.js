@@ -2,8 +2,9 @@ const mongoose = require("mongoose")
 
 const productSchema = new mongoose.Schema({
     UserId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        type:String
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: "User"
     },
     Title: {
         type: String,
@@ -17,12 +18,19 @@ const productSchema = new mongoose.Schema({
     Categories: {
         type: String,
     },
+    CountInStock:{
+        type: Number,
+    },
     price: {
-        type: String,
+        type: Number,
     },
     Address: {
         type: String,
     },
+    inStock:{
+        type:Boolean,
+        default:true
+    }
 })
 
 const Product = mongoose.model("Products", productSchema)
