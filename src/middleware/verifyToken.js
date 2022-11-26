@@ -37,11 +37,10 @@ const verifyTokenAndfamer = (req,res,next)=>{
 const verifyTokenAndAuhorization = (req,res,next)=>{
   const token =  req.headers.authorization
   const user = verify(token)
-  console.log(user);
-    if(user.data._id === req.params._id ){
+    if(user.data.id === req.params.id ){
       next()
     }else{
-      res.status(500).json("you don't have access")
+      res.status(500).json("you don't have ")
     }
 }
 

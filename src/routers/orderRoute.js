@@ -8,6 +8,6 @@ orderRoute.get("/get/:_id",getorder)
 orderRoute.get("/All",getAllorders)
 orderRoute.patch("/update/:_id",verifyTokenAndAuhorization, updatorder)
 orderRoute.delete("/delete/:_id",verifyTokenAndAuhorization,deletorder)
-orderRoute.get("/userOrder", getOrderByUserId)
+orderRoute.get("/user/:userId",verifyTokenAndAuhorization, getOrderByUserId)
 module.exports = orderRoute
  

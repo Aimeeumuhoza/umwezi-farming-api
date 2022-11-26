@@ -35,14 +35,11 @@ const creatorder =async(req,res)=>{
       console.log(error);
     }
   }
-  const getOrderByUserId = async() =>{
+  const getOrderByUserId = async(req,res) =>{
     try {
-      const {userId} = req.user.data.id
-      const orders = await Order.find(userId)
-      console.log(orders);
-      // console.log(orders);
-      // const user = await Order.find(userId)
-      // console.log(user)
+      const id = req.user.data.id
+      const orders = await Order.find({userId:id})
+      return res.status(200).json({message:"order are retrieved",orders})
     } catch (error) {
       
     }
