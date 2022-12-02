@@ -30,7 +30,7 @@ const getProduct = async (req, res) => {
     const id = req.params._id
     const product = await Product.findById(id)
 
-    res.status(200).json({ message: "products", product })
+    res.status(200).json(product)
   } catch (error) {
     console.log(error);
   }
