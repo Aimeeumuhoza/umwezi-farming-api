@@ -37,7 +37,7 @@ const getProduct = async (req, res) => {
 }
 const getAllproduct = async (req, res) => {
   try {
-    const product = await Product.find()
+    const product = await Product.find().sort({createdAt: -1 })
     res.status(200).json(product)
   } catch (err) {
     console.log(err);
