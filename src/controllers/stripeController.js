@@ -19,7 +19,7 @@ const pay = async (req, res) => {
         res.status(200).json({message:"payment iNitiated",clientSecret});
     } catch (err) {
         console.log(err);
-        res.status(200).json({error:error.message})
+        res.status(200).json({error:err.message})
     }
 }
 
