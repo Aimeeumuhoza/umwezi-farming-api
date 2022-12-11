@@ -4,7 +4,7 @@ const {createproduct, getProduct,getAllproduct,updateproduct,deleteproduct,getUs
 const {verifyTokenAndfamer }=require("../middleware/verifyToken")
 const upload = require("../helpers/multer")
 
-productRoute.post("/create" ,verifyTokenAndfamer,upload.single("Image"),createproduct)
+productRoute.post("/create" ,upload.single("Image"),createproduct)
 productRoute.get("/get/:_id", getProduct)
 productRoute.get("/user/:userId", getUserProduct)
 productRoute.get("/All", getAllproduct)

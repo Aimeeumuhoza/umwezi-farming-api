@@ -1,8 +1,10 @@
 const express = require("express");
-const payment = require("../controllers/stripeController")
+const {pay,stripecard} = require("../controllers/stripeController")
 
 const stripeRouter = express()
 
-stripeRouter.post("/payment",payment)
+stripeRouter.post("/pay",pay)
+stripeRouter.post("/stripe",stripecard)
+
 
 module.exports = stripeRouter
