@@ -6,7 +6,7 @@ const creatorder =async(req,res)=>{
     try{
       const id= req.user.data.id
       const order = await Order.create({
-        UserId:id,
+        UserId:req.body.UserId,
         Products:req.body.Products,
         Amount:req.body.Amount,
         Quantity:req.body.Quantity,
